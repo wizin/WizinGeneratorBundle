@@ -1,0 +1,27 @@
+{
+    "name": "wizin/generator-bundle",
+    "description": "Bundle to generate a bundle that extends SensioGeneratorBundle",
+    "keywords": [],
+    "type": "symfony-bundle",
+    "version": "0.0.1",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "gusagi",
+            "email": "gusagi@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "sensio/generator-bundle": "~2.3"
+    },
+    "autoload": {
+        "psr-0": { "Wizin\\Bundle\\GeneratorBundle": "src/" }
+    },
+    "target-dir": "Wizin/Bundle/GeneratorBundle",
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "develop"
+        }
+    }
+}
