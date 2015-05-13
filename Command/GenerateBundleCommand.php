@@ -6,7 +6,7 @@ use Sensio\Bundle\GeneratorBundle\Command\GenerateBundleCommand as BaseCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputOption;
-use Sensio\Bundle\GeneratorBundle\Command\Helper\QuestionHelper;
+use Sensio\Bundle\GeneratorBundle\Command\Helper\DialogHelper;
 use Wizin\Bundle\GeneratorBundle\Generator\BundleGenerator;
 
 /**
@@ -51,17 +51,17 @@ class GenerateBundleCommand extends BaseCommand
     }
 
     /**
-     * @param QuestionHelper $questionHelper
+     * @param DialogHelper $dialog
      * @param InputInterface $input
      * @param OutputInterface $output
      * @param $bundle
      * @param $format
      * @return array
      */
-    protected function updateRouting(QuestionHelper $questionHelper, InputInterface $input, OutputInterface $output, $bundle, $format)
+    protected function updateRouting(DialogHelper $dialog, InputInterface $input, OutputInterface $output, $bundle, $format)
     {
         if ($input->getOption('without-controller') === false) {
-            return parent::updateRouting($questionHelper, $input, $output, $bundle, $format);
+            return parent::updateRouting($dialog, $input, $output, $bundle, $format);
         }
     }
 }
