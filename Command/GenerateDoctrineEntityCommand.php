@@ -8,7 +8,7 @@ use Wizin\Bundle\GeneratorBundle\Generator\DoctrineEntityGenerator;
 /**
  * Generates a Doctrine entity class based on its name, fields and format.
  *
- * @author gusagi <gusagi@gmail.com>
+ * @author Makoto Hashiguchi <gusagi@gmail.com>
  */
 class GenerateDoctrineEntityCommand extends BaseCommand
 {

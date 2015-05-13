@@ -9,7 +9,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  *
  * Bundle to generate a bundle that extends SensioGeneratorBundle
  *
- * @author gusagi <gusagi@gmail.com>
+ * @author Makoto Hashiguchi <gusagi@gmail.com>
  */
 class WizinGeneratorBundle extends Bundle
 {

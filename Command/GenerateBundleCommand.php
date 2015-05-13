@@ -12,7 +12,7 @@ use Wizin\Bundle\GeneratorBundle\Generator\BundleGenerator;
 /**
  * Generates bundles.
  *
- * @author gusagi <gusagi@gmail.com>
+ * @author Makoto Hashiguchi <gusagi@gmail.com>
  */
 class GenerateBundleCommand extends BaseCommand
 {

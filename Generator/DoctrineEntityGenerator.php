@@ -8,7 +8,7 @@ use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 /**
  * Generates a Doctrine entity class based on its name, fields and format.
  *
- * @author gusagi <gusagi@gmail.com>
+ * @author Makoto Hashiguchi <gusagi@gmail.com>
  */
 class DoctrineEntityGenerator extends BaseGenerator
 {
