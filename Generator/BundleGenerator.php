@@ -5,11 +5,12 @@ namespace Wizin\Bundle\GeneratorBundle\Generator;
 use Sensio\Bundle\GeneratorBundle\Generator\BundleGenerator as BaseGenerator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\DependencyInjection\Container;
 
 /**
  * Generates a bundle.
  *
- * @author gusagi <gusagi@gmail.com>
+ * @author Makoto Hashiguchi <gusagi@gmail.com>
  */
 class BundleGenerator extends BaseGenerator
 {
@@ -18,6 +19,43 @@ class BundleGenerator extends BaseGenerator
     private $dir;
     private $format;
     private $structure;
+    private $skeletonDirs;
+
+    public function __construct(Filesystem $filesystem)
+    {
+        $this->skeletonDirs = [__DIR__.'/../Resources/skeleton'];
+        parent::__construct($filesystem);
+    }
+
+    /**
+     * Sets an array of directories to look for templates.
+     *
+     * The directories must be sorted from the most specific to the most
+     * directory.
+     *
+     * @param array $skeletonDirs An array of skeleton dirs
+     */
+    public function setSkeletonDirs($skeletonDirs)
+    {
+        if (is_array($skeletonDirs) === false) {
+            $skeletonDirs = array($skeletonDirs);
+        }
+        $this->skeletonDirs = array_merge($this->skeletonDirs, $skeletonDirs);
+    }
+
+    /**
+     * Get the twig environment that will render skeletons
+     * @return \Twig_Environment
+     */
+    protected function getTwigEnvironment()
+    {
+        return new \Twig_Environment(new \Twig_Loader_Filesystem($this->skeletonDirs), array(
+                'debug'            => true,
+                'cache'            => false,
+                'strict_variables' => true,
+                'autoescape'       => false,
+            ));
+    }
 
     /**
      * @param string $namespace
@@ -34,6 +72,7 @@ class BundleGenerator extends BaseGenerator
         $this->dir = $dir;
         $this->format = $format;
         $this->structure = $structure;
+
         parent::generate($namespace, $bundle, $dir, $format, $structure);
     }
 
@@ -53,5 +92,17 @@ class BundleGenerator extends BaseGenerator
             }
         }
         $filesystem->mkdir($dir .'/Exception');
+
+        $basename = substr($this->bundle, 0, -6);
+        $parameters = array(
+            'namespace' => $this->namespace,
+            'bundle'    => $this->bundle,
+            'format'    => $this->format,
+            'bundle_basename' => $basename,
+            'extension_alias' => Container::underscore($basename),
+        );
+        if ('yml' === $this->format) {
+            $this->renderFile('bundle/parameters.yml.twig', $dir.'/Resources/config/parameters.yml', $parameters);
+        }
     }
 }
